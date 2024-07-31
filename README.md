@@ -28,13 +28,13 @@ Antes das rotas, vamos entender qual a estrutura (propriedades) que uma task dev
 
 Rotas:
 
-- `POST - /tasks`
+- `POST - /tasks`✅
     
     Deve ser possível criar uma task no banco de dados, enviando os campos `title` e `description` por meio do `body` da requisição.
     
     Ao criar uma task, os campos: `id`, `created_at`, `updated_at` e `completed_at` devem ser preenchidos automaticamente, conforme a orientação das propriedades acima.
     
-- `GET - /tasks`
+- `GET - /tasks`✅
     
     Deve ser possível listar todas as tasks salvas no banco de dados.
     
