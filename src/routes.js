@@ -4,22 +4,7 @@ import { buildRoutePath } from './utils/build-route-path.js'
 
 const database = new Database()
 
-// to do: create a route for each method
 export const routes = [
-  {
-    method: 'GET',
-    path: buildRoutePath('/tasks'),
-    handler: (req, res) => {
-      const { search } = req.query
-
-      const tasks = database.select('tasks', {
-        title: search,
-        description: search
-      })
-
-      return res.end(JSON.stringify(tasks))
-    }
-  },
   {
     method: 'POST',
     path: buildRoutePath('/tasks'),
@@ -34,7 +19,7 @@ export const routes = [
 
       if (!description) {
         return res.writeHead(400).end(
-          JSON.stringify({ message: 'description is required' })
+          JSON.stringify({message: 'description is required' })
         )
       }
 
@@ -50,6 +35,20 @@ export const routes = [
       database.insert('tasks', task)
 
       return res.writeHead(201).end()
+    }
+  },
+  {
+    method: 'GET',
+    path: buildRoutePath('/tasks'),
+    handler: (req, res) => {
+      const { search } = req.query
+
+      const tasks = database.select('tasks', {
+        title: search,
+        description: search
+      })
+
+      return res.end(JSON.stringify(tasks))
     }
   },
   {
@@ -99,5 +98,22 @@ export const routes = [
   },
   {
     method: 'PATCH',
+    path: buildRoutePath('/tasks/:id/complete'),
+    handler: (req, res) => {
+      const { id } = req.params
+
+      const [task] = database.select('tasks', { id })
+
+      if (!task) {
+        return res.writeHead(404).end()
+      }
+
+      const isTaskCompleted = !!task.completed_at
+      const completed_at = isTaskCompleted ? null : new Date()
+
+      database.update('tasks', id, { completed_at })
+
+      return res.writeHead(204).end()
+    }
   }
 ]
