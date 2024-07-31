@@ -40,7 +40,7 @@ Rotas:
     
     Também deve ser possível realizar uma busca, filtrando as tasks pelo `title` e `description`
     
-- `PUT - /tasks/:id`
+- `PUT - /tasks/:id`✅
     
     Deve ser possível atualizar uma task pelo `id`.
     
@@ -50,7 +50,7 @@ Rotas:
     
     Antes de realizar a atualização, deve ser feito uma validação se o `id` pertence a uma task salva no banco de dados.
     
-- `DELETE - /tasks/:id`
+- `DELETE - /tasks/:id`✅
     
     Deve ser possível remover uma task pelo `id`.
     
